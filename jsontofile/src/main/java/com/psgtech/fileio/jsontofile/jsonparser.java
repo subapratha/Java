@@ -65,7 +65,7 @@ public class jsonparser {
 					Map.Entry<String, JsonValue> entry = (Map.Entry<String, JsonValue>) iterator.next();
 					StudentMap.put(entry.getKey(), entry.getValue());
 					
-					 System.out.println("Key : " + entry.getKey() + " Value :" + entry.getValue());
+					// System.out.println("Key : " + entry.getKey() + " Value :" + entry.getValue());
 					
 
 				}
@@ -82,7 +82,7 @@ public class jsonparser {
 				        System.out.println("typeArgClass = " + typeArgClass);
 				    }
 				}
-*/				System.out.println(StudentMap.getClass());
+*/				//System.out.println(StudentMap.getClass());
 				
 			}
 
