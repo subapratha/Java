@@ -2,6 +2,7 @@ package com.psgtech.fileio.jsontofile;
 
 import org.boon.Lists;
 import org.boon.Maps;
+import org.boon.Sets;
 import org.boon.core.Dates;
 import org.boon.core.Value;
 import org.boon.json.JsonFactory;
@@ -31,6 +32,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
+
+import javax.json.JsonValue;
+
 import java.util.Map.Entry;
 
 import static org.boon.Boon.puts;
@@ -44,7 +49,7 @@ public class BoonSerDeSer {
 			ObjectMapper mapper = JsonFactory.create();
 			Map StudentMap;
 
-			StudentMap = mapper.readValue(new FileInputStream("c://users/admin/desktop/output-2.json"), Map.class);
+			StudentMap = mapper.fromJson(new FileInputStream("c://users/admin/desktop/output-2.json"), Map.class);
 			
 			// check if has at least one column
 			if (StudentMap.size() < 1)
@@ -55,19 +60,20 @@ public class BoonSerDeSer {
 				headers[++i] = iterator.next();
 			// print all headers
 			for (i = 0; i < headers.length; i++) {
-				System.out.print(i == 0 ? headers[i] : String.format("\t%s", headers[i]));
+				System.out.print(i == 0 ? headers[i] :  String.format("\t%s", headers[i]));
 			}
 			System.out.println();
 			int index = -1;
 			// determine size of data table
-			int dataTableSize = StudentMap.values().size();
-		    System.out.println(StudentMap);
+			//int dataTableSize = StudentMap.;
+		    //System.out.println(StudentMap);
 			// print data table
-			for (i = 0; i < dataTableSize; i++) {
+			//for (i = 0; i < dataTableSize; i++) {
+			int Val = StudentMap.values().size()	;
+			System.out.println("Values size "+ Val);
 			index = -1;
-			for (String key : headers)
-			System.out.print(++index == 0 ? StudentMap.getOrDefault(key, i): String.format("\t%s", StudentMap.getOrDefault(key, i)));
-			System.out.println("table format");
+			for (Object key : StudentMap.keySet()) {
+				//System.out.println("Key : " + key.toString() + " Value : " + StudentMap.get(key));
 			}
 			// loop through all your data and print it to the file
 			//FileWriter fos = new FileWriter("c:\\users/admin/desktop/tab-file.csv");
@@ -91,6 +97,8 @@ public class BoonSerDeSer {
 				 sb.append('^').append(' ');
 				 }
 
+			Collection<JsonValue> val=StudentMap.values();
+			System.out.println("value  "+val);
 			
 			//System.out.println("formatting Hash map : " + "\n" + sb);
 			//dos.close();
@@ -130,4 +138,7 @@ public class BoonSerDeSer {
 		}
 
 	}
+
+
+	
 }

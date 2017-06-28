@@ -11,9 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
+//import com.google.gson.stream.JsonToken;
 
-@SuppressWarnings("unused")
 public class RegRecordJsonTransformer {
 
 	public static void main(String[] args) throws UnsupportedEncodingException, FileNotFoundException {
@@ -26,14 +25,16 @@ public class RegRecordJsonTransformer {
 		Map<String, Object>[] inputJsonArray = readInputJson(args[0]);
 
 		// iterate each element in JSON array and transform to target array
-//		Map<String, Object>[][] targetJsonArray = transformJson(inputJsonArray);
+		// Map<String, Object>[][] targetJsonArray =
+		// transformJson(inputJsonArray);
 
 		// export target array into required output format
-//		exportJsonArray(targetJsonArray);
+		// exportJsonArray(targetJsonArray);
 		System.out.println(inputJsonArray);
 	}
 
-	private static Map<String, Object>[] readInputJson(String inputFileName) throws UnsupportedEncodingException, FileNotFoundException {
+	private static Map<String, Object>[] readInputJson(String inputFileName)
+			throws UnsupportedEncodingException, FileNotFoundException {
 		JsonReader reader = new JsonReader(new InputStreamReader(new FileInputStream(inputFileName), "UTF-8"));
 		try {
 			return readMessagesArray(reader);
@@ -58,33 +59,37 @@ public class RegRecordJsonTransformer {
 			messages.add(readMessage(reader));
 		}
 		reader.endArray();
-		
-		return (Map<String, Object>[])messages.toArray();
+
+		return (Map<String, Object>[]) messages.toArray();
 	}
 
 	public static Map<String, Object> readMessage(JsonReader reader) throws IOException {
 		Map<String, Object> record = new HashMap<>();
-
+		String name = "";
+	       String value="";
+	       
 		reader.beginObject();
-		while (reader.hasNext()) {
-			String name = reader.nextName();
-			String value = "";
-			if (name.equals("_id")) {
-				reader.beginObject();
-				reader.nextName();
-				value = reader.nextString();
-				reader.endObject();
-			} else {
-				try {
-					value = reader.nextString();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			record.put(name, value);
-		}
-		reader.endObject();
-		return record;
+		 while (reader.hasNext()) {
+			  name = reader.nextName();
+		      
+		       
+		       if (name.equals("_id")) {
+		         value = reader.nextString();
+		       } else {
+		         reader.skipValue();
+		       }
+			     
+		     }
+		 
+		     reader.endObject();
+		     return record(name, value);
+	}
+
+	private static Map<String, Object> record(String name, String value) {
+		// TODO Auto-generated method stub
+		//return null;
+		System.out.printf(name,value);
+		return null;
 	}
 
 }

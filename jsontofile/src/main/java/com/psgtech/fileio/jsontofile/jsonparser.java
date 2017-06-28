@@ -65,12 +65,12 @@ public class jsonparser {
 					Map.Entry<String, JsonValue> entry = (Map.Entry<String, JsonValue>) iterator.next();
 					StudentMap.put(entry.getKey(), entry.getValue());
 					
-					// System.out.println("Key : " + entry.getKey() + " Value :" + entry.getValue());
+					//System.out.println("Key : " + entry.getKey() + " Value :" + entry.getValue());
 					
 
 				}
-				
-			/*	Method method = MyClass.class.getMethod("getStringList", null);
+			}
+				 			/*	Method method = MyClass.class.getMethod("getStringList", null);
 
 				Type returnType = method.getGenericReturnType();
 
@@ -84,11 +84,11 @@ public class jsonparser {
 				}
 */				//System.out.println(StudentMap.getClass());
 				
-			}
+			
 
 			 StringWriter returnString = new StringWriter();
 			    Map<String,HashMap<String, String>> hashMap = new HashMap<String, HashMap<String, String>>();
-			    for (Entry e : hashMap.entrySet()) {
+			    for (Entry e : StudentMap.entrySet()) {
 			        HashMap<String, Number> hm = (HashMap<String, Number>) e.getValue();
 			        String key = (String) e.getKey();
 			        returnString.append("|\t").append(key).append("\t|");

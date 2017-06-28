@@ -11,7 +11,7 @@ public class StudentModel {
 	private String id;
 	private String name;
 	//private boolean permanent;
-	private AddressModel address;
+	transient AddressModel address;
 	private long[] phoneNumbers;
 	//private String role;
 	private List<String> cities;
