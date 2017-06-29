@@ -1,0 +1,116 @@
+GuesT House booking System
+Customer
+Empoyees
+Address
+Rooms
+RoomType
+Services
+
+Create Table Customer(
+	 
+	 Numberofguests int,
+	 IDCardNo VARCHAR(100),
+	 phoneNumber int,
+	 adresss varchar(100), FK constraint with address table
+	 ServicesAvailed varchar(100),
+	 GuestName varchar(100),
+	 Occupiedon date,
+	 Vacatedon date,
+	 ReservedBy varchar(100),
+	 roomalloted int,
+	 ID INT NOT NULL AUTO_INCREMENT  PRIMARY KEY)
+	 
+	 Create table Empoyees
+	 (
+	  FullName varchar(100),
+ Designation varchar(100),
+ Salary FLOAT,
+ PhoneNumber int,
+ DateofJoining Date,
+ address varchar(100),
+ EmployeeID int not null AUTO_INCREMENT  PRIMARY KEY
+	 )
+create table address(
+
+ City varchar(100),
+ State varchar(100),
+ Country varchar(100),
+ Street varchar(100),
+zipcode int,
+ AddressID not null AUTO_INCREMENT  primary key
+)
+
+create table rooms(
+ RoomId int not null AUTO_INCREMENT  primary key ,
+ roomType varchar(100) , fk with roomtype
+ description varchar(100),
+ floornumber varchar(100),
+ RoomNo int,
+ Occupiedon Date,
+ Vacatedon Date,
+ cancelledon Date,
+ checkintime Date,
+ Checkouttime Date,
+ Approvedby varchar(100) fk with employee
+ vacant int
+)
+create table roomType(
+ id int not null AUTO_INCREMENT primary key,
+ Cot varchar(100),
+ Facilities varchar(100),
+)
+create table Services(
+ id int not null,
+ Food varchar(100),
+ Durationoftheday varchar(100)
+)
+/*insert a new guest*/
+insert into table customer (CheckIntime ,
+	 Numberofguests ,
+	 IDCardNo ,
+	 phoneNumber ,
+	 adresss , 
+	 ServicesAvailed ,
+	 GuestName ,
+	 Occupiedon ,
+	 Vacatedon ,
+	 ReservedBy , roomalloted ) values ("1:10",5,'rtg1234',9122324399,'21 , avinashi road',1,'gayathri','29-06-2016','1-07-2017','Manoj');
+	 
+	 /*update number of guests*/
+	 update table customer set Numberofguests=3 where customerid='1' and guestname='gayathri';
+	 
+	 /* delete a customer*/
+	 delete from customer where customerid=6
+	 
+	 update rooms set vacant=1, cancelledon='26-6-2017' where roomid=100 
+	 
+	 update rooms set occupiedon='27-06-2017' where roomid=100
+	 
+	 
+	 /*occupancy report*/
+	 select c.Occupiedon,c.Vacatedon , r.RoomNo, c.ReservedBy, c.GuestName ,0 as percentage
+	 from customer c 
+	 inner join rooms r 
+	 on c.roomalloted=r.roomid 
+	 group by c.Occupiedon,c.Vacatedon , r.RoomNo, c.ReservedBy, c.GuestName
+	 union
+	 SELECT  '' as Occupiedon,'' as Vacatedon,'' as RoomNo,'' as ReservedBy,'' as GuestName,
+         SUM(1 + DATEDIFF( -- add 1 because start&finish on same day is still 1 day
+           LEAST(Checkout, LAST_DAY(month.d)), GREATEST(Checkin, month.d)
+         )) AS percentage
+FROM     rooms where Occupiedon between '29-06-2017' and '31-06-2017'
+  RIGHT JOIN (
+                   SELECT 20170101 AS d
+         UNION ALL SELECT 20170201 UNION ALL SELECT 20170301
+         UNION ALL SELECT 20170401 UNION ALL SELECT 20170501
+         UNION ALL SELECT 20170601 UNION ALL SELECT 20170701
+         UNION ALL SELECT 20170801 UNION ALL SELECT 20170901
+         UNION ALL SELECT 20171001 UNION ALL SELECT 20171101
+         UNION ALL SELECT 20171201
+  ) AS month ON
+             Checkin <= LAST_DAY(month.d)
+         AND month.d <= Checkout
+GROUP BY month.d
+
+	 /* availability report*/.
+	 select roomno, occupiedon, vacatedon,cancelledon from rooms where vacatedon between '29-06-2017' and '31-06-2017' and cancelledon  between '29-06-2017' and '31-06-2017' 
