@@ -17,23 +17,22 @@ public class SelectionSort {
 			//sorting using selection sort using for loop
 			int[] arr = { 1, 56, 34, 87, 23 };
 			int[] arr2 = dodelectionsort(arr);
-			 for(int i:arr2){
-			System.out.println();
-		            System.out.print(i);
-		            System.out.print(", ");
-		        }
+			System.out.print("Static array \n");
+			for (int i = 0; i < arr2.length; i++) {
+				System.out.println(arr2[i]);
+			}
 			List<Integer> list = new ArrayList<Integer>();
 			// sorting using collections
 			while ((s = br.readLine()) != null) {
 				int j = Integer.parseInt(s);
 				list.add(j);
 			}
-			//System.out.println("b4" + list);
+			System.out.println("before sorting done in list" + list);
 			Collections.sort(list);
 			Iterator<Integer> it = list.iterator();
 			while (it.hasNext()) {
 
-				//System.out.println(it.next());
+				System.out.println("\t sorting done by collections"+it.next());
 			}
 
 		} catch (Exception e) {

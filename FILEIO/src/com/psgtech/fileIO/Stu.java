@@ -39,7 +39,7 @@ public class Stu {
 	    {
 	        //Creating BufferedReader object to read the input text file
 	         
-	        BufferedReader reader = new BufferedReader(new FileReader("C:\\input.txt"));
+	        BufferedReader reader = new BufferedReader(new FileReader("C://users/admin/desktop/Studentdetails.txt"));
 	         
 	        //Creating ArrayList to hold Student objects
 	         
